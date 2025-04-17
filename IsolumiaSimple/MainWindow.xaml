@@ -98,11 +98,11 @@
                 TextAlignment="Center" RenderTransformOrigin="0.504,0.172" />
 
             <TextBlock
-                Margin="208,293,3,0"
+                Margin="208,293,3,2"
                 FontSize="10"
                 FontFamily="Bahnschrift Light"
                 Foreground="White"
-                TextAlignment="Center" RenderTransformOrigin="0.504,0.172" Height="10" VerticalAlignment="Top" ><Run Text="v"/><Run Text=" "/><Run Text="1.2"/><Run Text="."/><Run Language="en-de" Text="8"/></TextBlock>
+                TextAlignment="Center" RenderTransformOrigin="0.504,0.172" ><Run Text="v"/><Run Text=" "/><Run Text="1.2"/><Run Text="."/><Run Language="en-de" Text="9"/><LineBreak/><Run Language="en-de"/></TextBlock>
 
             <Image
                 Margin="228,-11,3,278"

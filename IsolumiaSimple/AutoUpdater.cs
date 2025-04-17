@@ -11,7 +11,7 @@ namespace IsolumiaSimple
 {
     internal static class VersionInfo
     {
-        public static string CurrentVersion = "1.2.8"; // Do not change this value
+        public static string CurrentVersion = "1.2.9";
     }
 
     internal class AutoUpdater
@@ -45,16 +45,13 @@ namespace IsolumiaSimple
             {
                 if (latestVersion != VersionInfo.CurrentVersion)
                 {
-                    var result = MessageBox.Show($"A new version ({latestVersion}) is available!\nWould you like to download it now?", "Update Available", MessageBoxButton.YesNo, MessageBoxImage.Information);
-                    if (result == MessageBoxResult.Yes)
-                    {
-                        await DownloadUpdateAsync(owner, repo, latestVersion);
-                    }
-                    else
-                    {
-                        Process.Start(new ProcessStartInfo($"https://github.com/{owner}/{repo}/releases/latest") { UseShellExecute = true });
-                        Process.Start(new ProcessStartInfo($"https://discord.gg/cookingclub") { UseShellExecute = true });
-                    }
+                    Process.Start(new ProcessStartInfo($"https://github.com/{owner}/{repo}/releases/latest") { UseShellExecute = true });
+                    Process.Start(new ProcessStartInfo($"https://discord.gg/cookingclub") { UseShellExecute = true });
+
+                    var result = MessageBox.Show($"Version {latestVersion} is available!\n\nAfter pressing OK the program it will close itself and continue to download and open the new .rar for you to extract.",
+                        "Update Available", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    await DownloadAndInstallUpdateAsync(owner, repo, latestVersion);
                 }
                 else
                 {
@@ -67,7 +64,7 @@ namespace IsolumiaSimple
             }
         }
 
-        private static async Task DownloadUpdateAsync(string owner, string repo, string latestVersion)
+        private static async Task DownloadAndInstallUpdateAsync(string owner, string repo, string latestVersion)
         {
             try
             {
@@ -93,14 +90,13 @@ namespace IsolumiaSimple
                     await downloadResponse.Content.CopyToAsync(fileStream);
                 }
 
-                MessageBox.Show($"The latest version has been downloaded to:\n{filePath}\n\nPlease delete this current version with all its components and extract the new .rar file to continue.", "Download Complete", MessageBoxButton.OK, MessageBoxImage.Information);
+                Process.Start(new ProcessStartInfo(filePath) { UseShellExecute = true });
 
-                Process.Start(new ProcessStartInfo($"https://github.com/{owner}/{repo}/releases/latest") { UseShellExecute = true });
-                Process.Start(new ProcessStartInfo($"https://discord.gg/cookingclub") { UseShellExecute = true });
+                Application.Current.Shutdown();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error during download: {ex.Message}", "Update Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Error during update: {ex.Message}", "Update Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
