@@ -1,6 +1,10 @@
 # Isolumia-Simple
 Simple Dead by Daylight Unlocker
 
+# DLC bypass
+Isolumia-Simple 1.3.0 with DLC bypass for Microsoft store<br>
+https://cdn.isolumia.com/Isolumia-Simple-MSDLCS.rar
+
 ## Requirements
 .NET 8 SDK <br>
 https://dotnet.microsoft.com/en-us/download/dotnet/8.0
